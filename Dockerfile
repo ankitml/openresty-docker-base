@@ -3,17 +3,17 @@
 
 FROM ubuntu:16.04
 MAINTAINER Ankit Mittal <ankitml@gmail.com>
-ENV REFRESHED_AT 2017-03-20
 
-ENV    DEBIAN_FRONTEND noninteractive && \
-  echo "deb-src http://archive.ubuntu.com/ubuntu xenial main" >> /etc/apt/sources.list && \
+ENV    DEBIAN_FRONTEND noninteractive
+RUN  echo "deb-src http://archive.ubuntu.com/ubuntu xenial main" >> /etc/apt/sources.list && \
   sed 's/main$/main universe/' -i /etc/apt/sources.list && \
   apt-get update && \
   apt-get upgrade -y && \
   apt-get -y install wget vim git libpq-dev && \
-  apt-get -y install lua5.2 && \
-  apt-get -y install liblua5.2-dev && \
-  apt-get -y install unzip
+  apt-get -y install lua5.1 && \
+  apt-get -y install liblua5.1-dev && \
+  apt-get -y install unzip && \
+  apt-get -y install postgresql-client
 
 
 # Openresty (Nginx)
@@ -39,5 +39,3 @@ RUN \
   make clean && \
   cd .. && \
   rm -rf luarocks-2.2.0
-
-
